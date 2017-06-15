@@ -25,13 +25,18 @@ private:
 	UPROPERTY(EditAnywhere)
 		float CrossHairYLocation = 0.33333f;
 
+	UPROPERTY(EditAnywhere)
+		float LintTraceRange = 1000000.f;
+
 	//Return an Out parameter, true if hit landscape
-	bool GetSightRayHitLocation(FVector& HitLocation) const;
 
 	ATank* GetControlledTank() const;
 
 	//Start the tank moving the barrel so that a shot whold hit where
 	//the crosshair intersects the world
 	void AimtowardCrosshair();
+
 	bool GetLookDirection(FVector2D ScreenLocation, FVector& LookDirection) const;
+	bool GetLookVectorHitLocation(FVector LookDirection, FVector& HitLocation) const;
+	bool GetSightRayHitLocation(FVector& HitLocation) const;
 };

@@ -28,10 +28,24 @@ void ATankAIController::BeginPlay()
 	}
 }
 
+void ATankAIController::Tick(float DeltaTime) {
+	Super::Tick(DeltaTime);
+	if (GetPlayerTank()) {
+		//TODO Move towards the player
+
+		// Aim towards the player
+		//FVector PlayerLocation = GetPlayerTank()->GetActorLocation();
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		//UE_LOG(LogTemp, Warning, TEXT("AI %s found : %s"), *(GetControlledTank()->GetName()), *(PlayerLocation.ToString()));
+		// Fire if ready
+	}
+	
+}
+
 
 ATank* ATankAIController::GetControlledTank() const
 {
-	return Cast<ATank>(GetPawn());
+	return Cast<ATank>(GetPawn()); //Get each of ai in level เก็ทพาว ของรถถังคันที่มี TankAIController.cpp แป๊ะสคริปไว้อยู่
 }
 
 ATank* ATankAIController::GetPlayerTank() const

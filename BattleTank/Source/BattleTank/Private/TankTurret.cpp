@@ -1,8 +1,8 @@
 // Fill out your copyright notice in the Description page of Project Settings.
-
+#include "TankTurret.h"
 #include "Engine.h"
 #include "BattleTank.h"
-#include "TankTurret.h"
+
 
 
 
@@ -13,6 +13,6 @@ void UTankTurret::Rotate(float RelativeSpeed) {
 	auto Rotation = RelativeRotation.Yaw + RotationChange;
 	FRotator NewRotation = FRotator(0, Rotation, 0);
 	SetRelativeRotation(NewRotation);
-	UE_LOG(LogTemp, Warning, TEXT("%s Rotate pos"), *NewRotation.ToString());
+	//UE_LOG(LogTemp, Warning, TEXT("%s Rotate pos"), *NewRotation.ToString());
 }
 

@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankPlayerController.h"
+#include "Tank.h"
 #include "Engine.h"
 #include "BattleTank.h"
 
@@ -33,6 +34,8 @@ void ATankPlayerController::AimtowardCrosshair()
 {
 	if (!GetControlledTank()) { return; }
 
+	auto Time = GetWorld()->GetTimeSeconds();
+	//UE_LOG(LogTemp, Warning, TEXT("%f  AimtowardCrosshair Call"), Time);
 	FVector HitLocation; // Out parameter
 	if (GetSightRayHitLocation(HitLocation)) // Has "side-effect", is going to line trace
 	{

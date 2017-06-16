@@ -10,37 +10,51 @@ void ATankAIController::BeginPlay()
 {
 	Super::BeginPlay();
 
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto ControlledTank = Cast<ATank>(GetPawn()); //Get each of ai in level เก็ทพาว ของรถถังคันที่มี TankAIController.cpp แป๊ะสคริปไว้อยู่
-	/*auto ControlledTank = GetControlledTank();
+	auto ControlledTank = GetControlledTank();
 	if (!ControlledTank) {
 		UE_LOG(LogTemp, Warning, TEXT("AI Controller Begin Play!"));
 	}
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("AI Controller possessing : %s"), *(ControlledTank->GetName()));
-	}*/
+	}
 
+	auto PlayerTank = GetPlayerTank();
+	if (!PlayerTank) {
+		UE_LOG(LogTemp, Warning, TEXT("AIController not found!"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("AIController found : %s"), *(PlayerTank->GetName()));
+	}
 }
 
 void ATankAIController::Tick(float DeltaTime) {
 	Super::Tick(DeltaTime);
-
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto ControlledTank = Cast<ATank>(GetPawn());
-
-	if (PlayerTank)
-	{
-		// TODO Move towards the player
+	if (GetPlayerTank()) {
+		//TODO Move towards the player
 
 		// Aim towards the player
-		ControlledTank->AimAt(PlayerTank->GetActorLocation());
-
-		ControlledTank->Fire(); // TODO limit firing rate
+		//FVector PlayerLocation = GetPlayerTank()->GetActorLocation();
+		GetControlledTank()->AimAt(GetPlayerTank()->GetActorLocation());
+		//UE_LOG(LogTemp, Warning, TEXT("AI %s found : %s"), *(GetControlledTank()->GetName()), *(PlayerLocation.ToString()));
+		// Fire if ready
 	}
 	
 }
 
+
+ATank* ATankAIController::GetControlledTank() const
+{
+	return Cast<ATank>(GetPawn()); //Get each of ai in level เก็ทพาว ของรถถังคันที่มี TankAIController.cpp แป๊ะสคริปไว้อยู่
+}
+
+ATank* ATankAIController::GetPlayerTank() const
+{
+	auto PlayerPawn = GetWorld()->GetFirstPlayerController()->GetPawn();
+	if (!PlayerPawn) { return nullptr; }
+	return Cast<ATank>(PlayerPawn);
+}
  
 
 

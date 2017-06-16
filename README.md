@@ -10,3 +10,5 @@ An Openword head to head tank fight with simple AI, and advanced control system 
 * BT06 Creating & Scaling Landscape
 * BT07 Creating Terrian with Landscape Editor
 * BT08 Painting Terrain with Layer Material and Set Color in BP Material
+
+//BT45 Wrong Commit Code
